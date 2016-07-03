@@ -1,0 +1,15 @@
+crear ambiente virtual:
+virtualenv -p /usr/bin/python2.7 venv
+
+activar virtualenv:
+source venv/bin/activate
+
+instalar djiango y paquetes nesesario en ambiente virtual:
+//se deve tener activado el ambiente virtual para que los paquetes se intalen en el ambiente//
+pip install Django
+
+pip install djangorestframework
+
+pip install markdown
+
+pip install django-filter

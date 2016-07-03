@@ -76,25 +76,45 @@ class Studentslist(APIView):
 
      def get(self, request):
         #serializer = GroupsSerializer(data1, many=True)
-        students = Students.objects.all()
-        data_grup  = []
-        data_list = []
-        for st in students:
-            newOrder = dict()
-            newOrder['id'] = st.id
-            newOrder['name'] = st.name
-            newOrder['self'] = st.self
-            newOrder['ap1'] = st.ap1
-            newOrder['ap2'] = st.ap2
-            data_grup.append(newOrder)
-            #data_list.append('groups': newOrder)
+        if len(request.GET.values()) != 0:
+            token_get = request.GET['authentication_token']
+        else:
+            token_get = '1'
+        authentication_token = '123'
+        if token_get == authentication_token:
+            students = Students.objects.all()
+            data_grup  = []
+            data_list = []
+            for st in students:
+                newOrder = dict()
+                newOrder['id'] = st.id
+                newOrder['name'] = st.name
+                newOrder['self'] = st.self
+                newOrder['ap1'] = st.ap1
+                newOrder['ap2'] = st.ap2
+                data_grup.append(newOrder)
+                #data_list.append('groups': newOrder)
 
-        data_g = []    
-        newOrder = dict()
-        newOrder['students'] =  data_grup
-        data_g.append(newOrder)
-        data_list.append({
-            'status': 'success',
-            'data': data_g,
-            'message':'null'})
-        return Response(data_list)
+            data_g = []    
+            newOrder = dict()
+            newOrder['students'] =  data_grup
+            data_g.append(newOrder)
+            data_list.append({
+                'status': 'success',
+                'data': data_g,
+                'message':'null'})
+            return Response(data_list)
+        else:
+            data_list = []
+            if token_get == '1':
+                data_list.append({
+                    'status': 'error',
+                    'data': None,
+                    'message':'le falta authentication_token'})
+            else:
+                data_list.append({
+                    'status': 'error',
+                    'data': None,
+                    'message':'lo siento padre'})
+            return Response(data_list)
+            
