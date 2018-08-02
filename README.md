@@ -1,4 +1,4 @@
-una ves descargado se debe crear un ambiente virtual 
+una ves descargado el virtualenv, se debe crear un ambiente virtual 
 
 crear ambiente virtual:
 virtualenv -p /usr/bin/python2.7 venv
